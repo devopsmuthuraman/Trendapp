@@ -1,9 +1,7 @@
 provider "aws"{
   region = "ap-south-1"
   alias = "apsouth1"
-  access_key = "AKIAZABRSJO7ZZCRAAEY"
-  secret_key = "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"
-}
+ }
 
 # Create VPC
 resource "aws_vpc" "main" {

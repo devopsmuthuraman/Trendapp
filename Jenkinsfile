@@ -1,13 +1,13 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = "<dockerhub-username>/trend-app:latest"
+        DOCKER_IMAGE = "mubha/trend-app:latest"
         KUBECONFIG = "/home/ec2-user/.kube/config"
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/<your-username>/Trend.git'
+                git 'https://github.com/devopsmuthuraman/Trendapp.git'
             }
         }
         stage('Build Docker Image') {

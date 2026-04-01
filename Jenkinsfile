@@ -1,19 +1,18 @@
 pipeline {
     agent any
     
-    environment {
+    environment{
         IMAGE_NAME = "trendapp"
         TAG = "latest"
         DOCKER_HUB = "mubha"
 
         DOCKER_IMAGE = "mubha/trend-app:latest"
         KUBECONFIG = "/home/ec2-user/.kube/config"
-
     }
-    stages {
+    stages{
         stage('Checkout') {
-            steps {
-                git 'https://github.com/devopsmuthuraman/Trendapp.git'
+            steps{
+                git branch: 'main', url: 'https://github.com/devopsmuthuraman/Trendapp.git'
             }
         }
         stage('Build Docker Image') {

@@ -96,4 +96,8 @@ resource "aws_instance" "ec2" {
   tags = {
   Name = "jenkins-server"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cc72c72262c462f732a1bad424e48d4bab303a71

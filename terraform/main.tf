@@ -93,38 +93,7 @@ resource "aws_instance" "ec2" {
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.sg.id]
 
-    user_data = <<-EOF
-    #!/bin/bash
-
-    sudo apt update -y
-
-    amazon-linux-extras install java-openjdk11 -y
-
-    wget -O /etc/yum.repos.d/jenkins.repo \
-      https://pkg.jenkins.io/redhat-stable/jenkins.repo
-
-    rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-
-    sudo apt install jenkins -y
-
-    systemctl start jenkins
-    systemctl enable jenkins
-
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-
-    chmod +x kubectl
-    mv kubectl /usr/local/bin/
-
-    sudo apt install -y firewalld
-    systemctl start firewalld
-    systemctl enable firewalld
-    firewall-cmd --permanent --add-port=8080/tcp
-    firewall-cmd --reload
-
-    echo "Setup complete"
-  EOF
-
-    tags = {
-    Name = "jenkins-server"
+  tags = {
+  Name = "jenkins-server"
   }
 }

@@ -1,8 +1,10 @@
 pipeline {
     agent any
+    
     environment {
-        DOCKER_IMAGE = "mubha/trend-app:latest"
-        KUBECONFIG = "/home/ec2-user/.kube/config"
+        IMAGE_NAME = "trendapp"
+        TAG = "latest"
+        DOCKER_HUB = "your-dockerhub-username"
     }
     stages {
         stage('Checkout') {
@@ -12,7 +14,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh 'docker build -t $DOCKER_HUB/$IMAGE_NAME:$TAG .'
             }
         }
         stage('Push to DockerHub') {

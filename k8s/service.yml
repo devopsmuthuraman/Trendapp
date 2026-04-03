@@ -5,7 +5,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: trend-app
+    app: terraform_jenkinserver
   ports:
     - protocol: TCP
       port: 80

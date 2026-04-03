@@ -13,7 +13,7 @@ spec:
         app: terraform_jenkinserver
     spec:
       containers:
-      - name: trend-app
+      - name: terraform_jenkinserver
         image: mubha/terraform_jenkinserver:latest
         ports:
         - containerPort: 80

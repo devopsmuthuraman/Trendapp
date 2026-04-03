@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: terraform_jenkinserver
+  name: terraform_jenkinserver-deployment
 spec:
   replicas: 2
   selector:

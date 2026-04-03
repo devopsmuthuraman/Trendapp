@@ -13,7 +13,7 @@ spec:
         app: terraform
     spec:
       containers:
-      - name: terraform_jenkinserver
+      - name: terraform
         image: mubha/terraform:latest
         ports:
         - containerPort: 80

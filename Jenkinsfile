@@ -1,5 +1,6 @@
-pipeline {
+pipeline{
     agent any
+<<<<<<< HEAD
     
     environment{
         IMAGE_NAME = "trendapp"
@@ -11,27 +12,51 @@ pipeline {
     }
     stages{
         stage('Checkout') {
+=======
+    environment{
+        IMAGE_NAME = "mubha/terraform"
+        TAG = "latest"
+        
+        DOCKER_IMAGE = "mubha/terraform_jenkinserver:latest"
+        KUBECONFIG = "/home/ec2-user/.kube/config"
+    }
+    stages{
+        stage('git clone'){
+>>>>>>> d59bc19 (updated April 3)
             steps{
                 git branch: 'main', url: 'https://github.com/devopsmuthuraman/Trendapp.git'
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t $DOCKER_HUB/$IMAGE_NAME:$TAG .'
+        stage('Build image'){
+            steps{
+                script{
+                    docker.build("${IMAGE_NAME}:${TAG}")
+                }
             }
         }
         stage('Push to DockerHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-                    sh 'echo $PASS | docker login -u $USER --password-stdin'
-                    sh 'docker push $DOCKER_IMAGE'
-                }
+                withCredentials([usernamePassword(
+                    credentialsId: 'aa043f6e-7ddd-44ad-b1d2-5ffe5ab7f1a1',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        docker login -u $DOCKER_USER -p $DOCKER_PASS
+                        docker push mubha/terraform
+                    '''
+                    }
             }
         }
         stage('Deploy to EKS') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl apply -f k8s/service.yaml'
+                script {
+                    sh """
+                        aws eks update-kubeconfig --name ${EKS_CLUSTER} --region ${AWS_REGION}
+                        kubectl get nodes
+                        kubectl apply -f deployment.yml
+                    """
+                }
             }
         }
     }

@@ -1,28 +1,17 @@
 pipeline{
     agent any
-<<<<<<< HEAD
-    
-    environment{
-        IMAGE_NAME = "trendapp"
-        TAG = "latest"
-        DOCKER_HUB = "mubha"
-
-        DOCKER_IMAGE = "mubha/trend-app:latest"
-        KUBECONFIG = "/home/ec2-user/.kube/config"
-    }
-    stages{
-        stage('Checkout') {
-=======
     environment{
         IMAGE_NAME = "mubha/terraform"
         TAG = "latest"
         
         DOCKER_IMAGE = "mubha/terraform_jenkinserver:latest"
         KUBECONFIG = "/home/ec2-user/.kube/config"
+
+        EKS_CLUSTER = 'your-cluster-name'
+        AWS_REGION  = 'your-region'
     }
     stages{
         stage('git clone'){
->>>>>>> d59bc19 (updated April 3)
             steps{
                 git branch: 'main', url: 'https://github.com/devopsmuthuraman/Trendapp.git'
             }

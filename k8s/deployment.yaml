@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: terraform_jenkinserver-deployment
+  name: terraform-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: terraform_jenkinserver
+      app: terraform
   template:
     metadata:
       labels:
-        app: terraform_jenkinserver
+        app: terraform
     spec:
       containers:
-      - name: terraform_jenkinserver
-        image: mubha/terraform_jenkinserver:latest
+      - name: terraform
+        image: mubha/terraform:latest
         ports:
         - containerPort: 80

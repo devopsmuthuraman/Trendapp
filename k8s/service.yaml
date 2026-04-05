@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: terraform_jenkinserver-service
+  name: terraform
 spec:
   type: LoadBalancer
   selector:
-    app: terraform_jenkinserver
+    app: terraform
   ports:
     - protocol: TCP
       port: 80

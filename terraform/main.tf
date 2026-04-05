@@ -93,39 +93,9 @@ resource "aws_instance" "ec2" {
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.sg.id]
 
-    user_data = <<-EOF
-    #!/bin/bash
-
-    sudo apt update
-    sudo apt install fontconfig openjdk-21-jre
-    java -version
-
-    sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
-    https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
-    echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
-    https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-    /etc/apt/sources.list.d/jenkins.list > /dev/null
-    sudo apt update
-    sudo apt install jenkins
-
-    systemctl start jenkins
-    systemctl enable jenkins
-
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-
-    chmod +x kubectl
-    mv kubectl /usr/local/bin/
-
-    sudo apt install -y firewalld
-    systemctl start firewalld
-    systemctl enable firewalld
-    firewall-cmd --permanent --add-port=8080/tcp
-    firewall-cmd --reload
-
-    echo "Setup complete"
-  EOF
-
-    tags = {
-    Name = "jenkins-server"
+  tags = {
+  Name = "Jenkins-Terra_server"
   }
+
+
 }

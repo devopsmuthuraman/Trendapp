@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        IMAGE_nAME = "terraform_jenkinserver/nodeapp"
+        IMAGE_nAME = "terraform/nodeapp"
         TAG = "latest"
         
         DOCKER_IMAGE = "mubha/terraform_jenkinserver:latest"
@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('git clone'){
             steps{
-                git branch: 'main', url: 'https://github.com/devopsmuthuraman/Trendapp.git'
+                git branch: 'main', url: 'https://github.com/devopsmuthuraman/Test.git'
             }
         }
         stage('Build image'){
